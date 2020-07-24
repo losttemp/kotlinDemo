@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
-    //var是自定义变量，val是自定义常量，相当于java当中的fina
+    //var是自定义变量，val是自定义常量，相当于java当中的final
     var a: Int = 2
     var b: Double = 1.0
     var c: Char = '1'
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val intent = Intent(this, MainActivity::class.java)
+        var intent = Intent(this, MainActivity::class.java)
     }
 
     //“:”被广泛用于变量类型的定义
@@ -40,8 +40,10 @@ class MainActivity : AppCompatActivity() {
             val name = "zhangsan"
             val age = 25
             val s = "${name}今年${age}岁"
-            test(s1= 22, s3 = "s3")
-            test1("1","2",s2 = "hh")
+            test(s1 = 22, s3 = "s3")
+            test1("1", "2", s2 = "hh")
+            //第二个参数代表是否忽略大小写
+            s.equals(name, true)
             return s
         }
 
@@ -51,9 +53,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         /**
-         * 可变参数值的话，需要用关键字vararg来定义。这里需要注意的是，一个函数仅能有一个可变参数。该可变参数不一定得是最后一个参数，但当这种情况下时，调用该方法，需要给其他未指明具体值的参数传值。
+         * 可变参数值的话，需要用关键字vararg来定义。这里需要注意的是，
+         * 一个函数仅能有一个可变参数。该可变参数不一定得是最后一个参数，
+         * 但当这种情况下时，调用该方法，需要给其他未指明具体值的参数传值。
+         * 问号代表可以传递空值
          */
-        fun test1(vararg s1: String, s2: String) {}
+        fun test1(vararg s1: String, s2: String?) {
+            //when表达式
+            when (s2) {
+                "10" -> println("10")
+                "20" -> println("20")
+                else -> println("100")
+
+            }
+        }
     }
 
 
