@@ -77,7 +77,8 @@ class MainActivity : AppCompatActivity() {
             return s
         }
 
-        //对Kotlin函数中的某个参数可以用“=”号指定其默认值，调用函数方法时可不不传这个参数，但其他参数需要用“=”号指定
+        //对Kotlin函数中的某个参数可以用“=”号指定其默认值，默认参数和具体参数
+        // 调用函数方法时可不不传这个参数，但其他参数需要用“=”号指定
         fun test(s1: Int, s2: String = "s2", s3: String) {
 
         }
