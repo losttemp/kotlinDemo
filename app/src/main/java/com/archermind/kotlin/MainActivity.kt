@@ -3,20 +3,35 @@ package com.archermind.kotlin
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
 class MainActivity : AppCompatActivity() {
     //var是自定义变量，val是自定义常量，相当于java当中的final
-    var a: Int = 2
+    var a = 1..100//区间数组
+    var bb = 1 until 100 //闭区间。不包含100
     var b: Double = 1.0
     var c: Char = '1'
     var d: Boolean = false
     var name = "name"
     var page: String = "nn"
     val TAG: String = "TAG"
+    val lists = listOf<String>("1", "2", "2")
+    val map = hashMapOf<String, String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var intent = Intent(this, MainActivity::class.java)
+        //var intent = Intent(this, MainActivity::class.java)
+        funa("我是谁")
+        for (b in bb) {
+            Log.d("tag", b.toString())
+        }
+        for (list in lists.withIndex()) {
+            Log.d(TAG, list.toString())
+        }
+        map["1"] = "张三"
+        map["2"] = "李四"
+        var f = { x: Int, y: Int -> x + y }//函数也可以作为表达式作为变量赋值
+        var j: (Int, Int) -> Int = { x, y -> x + y }//函数的另一种写法
     }
 
     //“:”被广泛用于变量类型的定义
@@ -25,8 +40,23 @@ class MainActivity : AppCompatActivity() {
 
     fun funa(str: String): String {
         var strhello = "hello"
-        strhello += str
+        var s1 = """我是${str}名字有${num(str.length)}长度"""
+        //strhello += str
+        Log.d("tag====", s1)
         return strhello
+    }
+
+    fun funaa(x: Int, y: Int): Int = x + y
+
+    fun num(num: Int): String {
+        var numresult = when (num) {
+            1 -> "1"
+            2 -> "2"
+            3 -> "3"
+            else -> "weizhi"
+
+        }
+        return numresult
     }
 
     interface IinterfaceA {

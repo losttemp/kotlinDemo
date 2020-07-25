@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MyApplication.iml" filepath="$PROJECT_DIR$/MyApplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kotlinDemo.iml" filepath="$PROJECT_DIR$/kotlinDemo.iml" group="kotlinDemo" />
+      <module fileurl="file://$PROJECT_DIR$/app/kotlinDemo-app.iml" filepath="$PROJECT_DIR$/app/kotlinDemo-app.iml" group="kotlinDemo/app" />
     </modules>
   </component>
 </project>
