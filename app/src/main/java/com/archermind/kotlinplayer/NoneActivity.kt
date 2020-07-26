@@ -1,12 +1,10 @@
-package com.archermind.kotlin
+package com.archermind.kotlinplayer
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 
-class MainActivity : AppCompatActivity() {
+class NoneActivity : AppCompatActivity() {
     //var是自定义变量，val是自定义常量，相当于java当中的final
     var a = 1..100//区间数组
     var bb = 1 until 100 //闭区间。不包含100
@@ -24,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         //var intent = Intent(this, MainActivity::class.java)
         funa("我是谁")
         for (b in bb) {
