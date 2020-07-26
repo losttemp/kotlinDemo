@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/kotlinDemo.iml" filepath="$PROJECT_DIR$/kotlinDemo.iml" group="kotlinDemo" />
       <module fileurl="file://$PROJECT_DIR$/app/kotlinDemo-app.iml" filepath="$PROJECT_DIR$/app/kotlinDemo-app.iml" group="kotlinDemo/app" />
+      <module fileurl="file://$PROJECT_DIR$/kotlinPlayer.iml" filepath="$PROJECT_DIR$/kotlinPlayer.iml" group="kotlinPlayer" />
+      <module fileurl="file://$PROJECT_DIR$/app/kotlinPlayer-app.iml" filepath="$PROJECT_DIR$/app/kotlinPlayer-app.iml" group="kotlinPlayer/app" />
     </modules>
   </component>
 </project>
