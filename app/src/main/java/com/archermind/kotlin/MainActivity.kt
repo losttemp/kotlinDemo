@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     //var是自定义变量，val是自定义常量，相当于java当中的final
@@ -12,19 +13,26 @@ class MainActivity : AppCompatActivity() {
     var b: Double = 1.0
     var c: Char = '1'
     var d: Boolean = false
-    var name = "name"
+    var names = listOf<String>("张三", "李四", "王五")
     var page: String = "nn"
     val TAG: String = "TAG"
     val lists = listOf<String>("1", "2", "2")
     val map = hashMapOf<String, String>()
+    var print = fun(name: String): Unit {
+        Log.d("tag====", name)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //var intent = Intent(this, MainActivity::class.java)
         funa("我是谁")
         for (b in bb) {
+            bb.maxBy { b }//查找集合中最大值
+            bb.filter { b >= 7 }//条件过滤
             Log.d("tag", b.toString())
         }
+
         for (list in lists.withIndex()) {
             Log.d(TAG, list.toString())
         }
@@ -32,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         map["2"] = "李四"
         var f = { x: Int, y: Int -> x + y }//函数也可以作为表达式作为变量赋值
         var j: (Int, Int) -> Int = { x, y -> x + y }//函数的另一种写法
+
+        names.forEach(print)
+        names.forEach {
+            Log.d("tag====", it)
+        }
     }
 
     //“:”被广泛用于变量类型的定义
