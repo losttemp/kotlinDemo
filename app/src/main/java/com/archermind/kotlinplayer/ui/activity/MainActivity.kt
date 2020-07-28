@@ -19,5 +19,8 @@ class MainActivity : BaseActivity(), ToolbarManage {
 
     }
 
+    override fun initMainToolBar() {
+
+    }
 
 }

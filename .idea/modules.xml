@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/kotlinPlayer.iml" filepath="$PROJECT_DIR$/kotlinPlayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kotlinPlayer.iml" filepath="$PROJECT_DIR$/kotlinPlayer.iml" group="kotlinPlayer" />
+      <module fileurl="file://$PROJECT_DIR$/app/kotlinPlayer-app.iml" filepath="$PROJECT_DIR$/app/kotlinPlayer-app.iml" group="kotlinPlayer/app" />
     </modules>
   </component>
 </project>
