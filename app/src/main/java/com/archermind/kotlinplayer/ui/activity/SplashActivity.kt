@@ -6,7 +6,6 @@ import android.view.View
 import com.archermind.kotlinplayer.R
 import com.archermind.kotlinplayer.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_splash.*
-import org.jetbrains.anko.startActivity
 
 class SplashActivity : BaseActivity(), ViewPropertyAnimatorListener {
     override fun getlayoutId(): Int {
@@ -19,8 +18,7 @@ class SplashActivity : BaseActivity(), ViewPropertyAnimatorListener {
     }
 
     override fun onAnimationEnd(view: View?) {
-        startActivity<MainActivity>()
-        finish()
+        startActivityAndFinsh<MainActivity>()
     }
 
     override fun onAnimationCancel(view: View?) {

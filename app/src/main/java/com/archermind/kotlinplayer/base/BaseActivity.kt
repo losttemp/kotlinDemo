@@ -2,7 +2,9 @@ package com.archermind.kotlinplayer.base
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.archermind.kotlinplayer.ui.activity.MainActivity
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 abstract class BaseActivity : AppCompatActivity(), AnkoLogger {
@@ -30,4 +32,8 @@ abstract class BaseActivity : AppCompatActivity(), AnkoLogger {
 
     }
 
+    inline fun <reified T : BaseActivity> startActivityAndFinsh() {
+        startActivity<T>()
+        finish()
+    }
 }
