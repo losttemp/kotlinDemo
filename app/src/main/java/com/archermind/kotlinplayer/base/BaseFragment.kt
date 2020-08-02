@@ -35,15 +35,15 @@ abstract class BaseFragment : Fragment(), AnkoLogger {
         initListener()
     }
 
-    protected fun initListener() {
+    open protected fun initListener() {
 
     }
 
-    protected fun initData() {
+    open protected fun initData() {
 
     }
 
-    fun showToast(msg: String) {
+    open fun showToast(msg: String) {
         context?.runOnUiThread { toast(msg) }
     }
 }
