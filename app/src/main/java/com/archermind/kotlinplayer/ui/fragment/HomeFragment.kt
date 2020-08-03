@@ -105,6 +105,7 @@ class HomeFragment : BaseFragment() {
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 showToast("获取数据失败")
+                refreshLayout.isRefreshing = false
 
             }
 
@@ -118,6 +119,7 @@ class HomeFragment : BaseFragment() {
                 ThreadUtil.runOnMainThread(object : Runnable {
                     override fun run() {
                         homeAdapter.updataList(list)
+                        refreshLayout.isRefreshing = false
                     }
 
                 })
