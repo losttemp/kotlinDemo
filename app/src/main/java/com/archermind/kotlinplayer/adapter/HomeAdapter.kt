@@ -8,7 +8,7 @@ import com.archermind.kotlinplayer.widget.LoadMoreView
 import com.itheima.player.model.bean.HomeItemBean
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeHolder>() {
-    private val list = ArrayList<HomeItemBean>()
+    private var list = ArrayList<HomeItemBean>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeHolder {
@@ -35,21 +35,24 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeHolder>() {
     }
 
     override fun onBindViewHolder(holder: HomeHolder?, position: Int) {
+        //如果是最后一条 不需要刷新view
+        if (position == list.size) return
         val data = list.get(position)
         val homeItemView = holder?.itemView as HomeItemView
         homeItemView.satData(data)
     }
 
-    fun updataList(updatalist: List<HomeItemBean>?) {
-        this.list.clear()
-        this.list.addAll(updatalist!!)
-        notifyDataSetChanged()
-
+    fun updataList(list: List<HomeItemBean>?) {
+        list?.let {
+            this.list.clear()
+            this.list.addAll(list)
+            notifyDataSetChanged()
+        }
     }
 
     fun loadMore(list: List<HomeItemBean>?) {
         list?.let {
-            this.list.addAll(it)
+            this.list.addAll(list)
             notifyDataSetChanged()
         }
     }
