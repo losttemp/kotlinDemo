@@ -46,4 +46,6 @@ abstract class BaseFragment : Fragment(), AnkoLogger {
     open fun showToast(msg: String) {
         context?.runOnUiThread { toast(msg) }
     }
+
+
 }

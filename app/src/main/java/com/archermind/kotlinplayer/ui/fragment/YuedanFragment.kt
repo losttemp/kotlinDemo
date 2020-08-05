@@ -9,18 +9,30 @@ import android.support.v4.app.Fragment
 import android.view.*
 import android.widget.TextView
 import com.archermind.kotlinplayer.R
+import com.archermind.kotlinplayer.adapter.YueDanAdapter
 import com.archermind.kotlinplayer.base.BaseFragment
+import com.archermind.kotlinplayer.base.BaseListAdapter
+import com.archermind.kotlinplayer.base.BaseListFragment
+import com.archermind.kotlinplayer.base.BaseListPresenter
+import com.archermind.kotlinplayer.presenter.impl.YueDanPresenterImpl
+import com.archermind.kotlinplayer.view.YueDanView
+import com.archermind.kotlinplayer.widget.YueDanItemView
+import com.itheima.player.model.bean.YueDanBean
 
 
-class YuedanFragment : BaseFragment() {
-    override fun initview(): View? {
-        val textview = TextView(this.activity)
-        textview.setTextColor(Color.RED)
-        textview.setText("yuedan")
-        textview.gravity = Gravity.CENTER
-        textview.setTextSize(50f)
-        return textview
-        //return activity.layoutInflater.inflate(R.layout.fragment_yuedan, null)
+class YuedanFragment : BaseListFragment<YueDanBean, YueDanItemView, YueDanBean.PlayListsBean>() {
+
+
+    override fun getChildPresenter(): BaseListPresenter {
+        return YueDanPresenterImpl(this)
+    }
+
+    override fun getChildAdapter(): BaseListAdapter<YueDanBean.PlayListsBean, YueDanItemView> {
+        return YueDanAdapter()
+    }
+
+    override fun getList(response: YueDanBean?): List<YueDanBean.PlayListsBean>? {
+        return response?.playLists
     }
 
 }

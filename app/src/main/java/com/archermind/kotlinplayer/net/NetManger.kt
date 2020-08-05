@@ -42,7 +42,7 @@ open class NetManger private constructor() {
                 val parseResult = mRequest.parseResult(result)
                 ThreadUtil.runOnMainThread(object : Runnable {
                     override fun run() {
-                        mRequest.handler.onSucess(mRequest.type, parseResult)
+                        parseResult?.let { mRequest.handler.onSucess(mRequest.type, it) }
                     }
 
                 })
