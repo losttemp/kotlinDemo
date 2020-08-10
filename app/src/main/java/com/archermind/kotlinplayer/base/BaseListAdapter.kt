@@ -4,7 +4,6 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.archermind.kotlinplayer.widget.HomeItemView
 import com.archermind.kotlinplayer.widget.LoadMoreView
 
 abstract class BaseListAdapter<ITEMBEAN, ITEMVIEW : View> : RecyclerView.Adapter<BaseListAdapter.BaseListHolder>() {
@@ -41,8 +40,15 @@ abstract class BaseListAdapter<ITEMBEAN, ITEMVIEW : View> : RecyclerView.Adapter
         val data = list.get(position)
         val itemview = holder?.itemView as ITEMVIEW
         refeshItemView(itemview, data)
+        itemview.setOnClickListener {
+            itemlistener?.let {
+                it(data)
+            }
+        }
     }
 
+    //定义函数类型变量
+    var itemlistener: ((itemBean: ITEMBEAN) -> Unit)? = null
     abstract fun getItemView(context: Context?): ITEMVIEW
     abstract fun refeshItemView(itemview: ITEMVIEW, data: ITEMBEAN)
 
@@ -59,6 +65,10 @@ abstract class BaseListAdapter<ITEMBEAN, ITEMVIEW : View> : RecyclerView.Adapter
             this.list.addAll(list)
             notifyDataSetChanged()
         }
+    }
+
+    fun setOnItemClickListener(itemlistener: (itembean: ITEMBEAN) -> Unit) {
+        this.itemlistener = itemlistener
     }
 
     class BaseListHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

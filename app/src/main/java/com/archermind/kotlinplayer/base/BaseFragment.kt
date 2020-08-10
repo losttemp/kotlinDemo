@@ -18,7 +18,7 @@ abstract class BaseFragment : Fragment(), AnkoLogger {
         debug { "test" }
     }
 
-    protected fun init() {
+    open protected fun init() {
 
     }
 
