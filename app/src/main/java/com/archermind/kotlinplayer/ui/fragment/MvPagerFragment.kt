@@ -6,7 +6,6 @@ import com.archermind.kotlinplayer.base.BaseListFragment
 import com.archermind.kotlinplayer.base.BaseListPresenter
 import com.archermind.kotlinplayer.model.VidoPlayerBean
 import com.archermind.kotlinplayer.presenter.impl.MvListPresenterImpl
-import com.archermind.kotlinplayer.ui.activity.IjkVideoPlayerActivity
 import com.archermind.kotlinplayer.ui.activity.JiecaoVideoPlayerActivity
 import com.archermind.kotlinplayer.view.MvListView
 import com.archermind.kotlinplayer.widget.MvItemView
@@ -36,7 +35,7 @@ class MvPagerFragment : BaseListFragment<MvPagerBean, MvItemView, VideosBean>(),
         adapter.setOnItemClickListener {
             val vidoPlayerBean = VidoPlayerBean(it.id, it.title, it.url)
             //JiecaoVideoPlayerActivity
-            startActivity<IjkVideoPlayerActivity>("item" to vidoPlayerBean)
+            startActivity<JiecaoVideoPlayerActivity>("item" to vidoPlayerBean)
         }
     }
 }
