@@ -53,11 +53,12 @@
                 <data android:mimeType="video/3gpp2" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.AudioPlayerActivity" />
     </application>
 
     <uses-permission
         android:name="android.permission.INTERACT_ACROSS_USERS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>
