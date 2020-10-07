@@ -7,15 +7,12 @@ import android.widget.RelativeLayout
 import com.archermind.kotlinplayer.R
 
 
-
 /**
  * ClassName:LoadMoreView
  * Description:
  */
-class LoadMoreView : RelativeLayout {
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+class LoadMoreView(context: Context?) : RelativeLayout(context) {
+
 
     init {
         View.inflate(context, R.layout.view_loadmore, this)

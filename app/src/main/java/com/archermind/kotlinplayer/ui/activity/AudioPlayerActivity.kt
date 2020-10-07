@@ -10,19 +10,22 @@ import android.os.IBinder
 import android.os.Message
 import android.support.annotation.MainThread
 import android.view.View
+import android.widget.AdapterView
 import android.widget.SeekBar
 import com.archermind.kotlinplayer.R
+import com.archermind.kotlinplayer.adapter.PopAdapter
 import com.archermind.kotlinplayer.base.BaseActivity
 import com.archermind.kotlinplayer.model.AudioBean
 import com.archermind.kotlinplayer.services.AudioService
 import com.archermind.kotlinplayer.services.Iservice
 import com.archermind.kotlinplayer.util.StringsUtil
+import com.archermind.kotlinplayer.view.PlayListPopWindow
 import de.greenrobot.event.EventBus
 import kotlinx.android.synthetic.main.activity_music_player_bottom.*
 import kotlinx.android.synthetic.main.activity_music_player_middle.*
 import kotlinx.android.synthetic.main.activity_music_player_top.*
 
-class AudioPlayerActivity : BaseActivity(), View.OnClickListener {
+class AudioPlayerActivity : BaseActivity(), View.OnClickListener, AdapterView.OnItemClickListener {
     val MSG_PROGRESS: Int = 11
     var drawable: AnimationDrawable? = null
     var duration: Int = 0
@@ -207,9 +210,14 @@ class AudioPlayerActivity : BaseActivity(), View.OnClickListener {
      * 显示播放列表
      */
     private fun showPlayList() {
-        //TODO:播放列表
         val list = iservice?.getPlayList()
-
+        //获取底部高度
+        list?.let {
+            val popAdapter = PopAdapter(list)
+            val bottomH = audio_player_bottom.height
+            val playListPopWindow = PlayListPopWindow(this, popAdapter, this, window)
+            playListPopWindow.showAsDropDown(audio_player_bottom, 0, bottomH)
+        }
     }
 
     /**
@@ -229,6 +237,10 @@ class AudioPlayerActivity : BaseActivity(), View.OnClickListener {
         //更新播放状态
         iservice?.updatePlayState()
         updatePlayStateBtn()
+    }
+
+    override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        iservice?.playPosition(p2)
     }
 }
 

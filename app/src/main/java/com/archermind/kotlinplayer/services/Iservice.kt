@@ -13,6 +13,7 @@ interface Iservice {
     fun getplayMode(): Int
     fun updatePlayMode()
     fun getPlayList(): List<AudioBean>?
+    fun playPosition(p2: Int)
 
 
 }

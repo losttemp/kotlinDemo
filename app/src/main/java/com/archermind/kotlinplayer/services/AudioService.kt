@@ -201,6 +201,11 @@ class AudioService : Service() {
             return list
         }
 
+        override fun playPosition(p2: Int) {
+            this@AudioService.position = p2
+            playItem()
+        }
+
 
         fun notifiUpdateUi() {
             //发送端
@@ -229,13 +234,7 @@ class AudioService : Service() {
         private fun autoplayNext() {
             when (mode) {
                 MODE_ALL -> {
-                    list?.let {
-                        if (position == it.size - 1) {
-                            position = 0
-                        } else {
-                            position++
-                        }
-                    }
+                    list?.let { position = (position + 1) % it.size }
 
                 }
                 MODE_RANDOM -> list?.let { position = Random().nextInt(it.size) }

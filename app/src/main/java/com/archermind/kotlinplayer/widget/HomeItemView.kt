@@ -9,7 +9,7 @@ import com.itheima.player.model.bean.HomeItemBean
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_home.view.*
 
-class HomeItemView : RelativeLayout {
+class HomeItemView(context: Context?) : RelativeLayout(context) {
     fun satData(data: HomeItemBean) {
         //歌曲名称
         title.setText(data.title)
@@ -18,9 +18,6 @@ class HomeItemView : RelativeLayout {
         Picasso.with(context).load(data.posterPic).into(bg)
     }
 
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     init {
         View.inflate(context, R.layout.item_home, this)
