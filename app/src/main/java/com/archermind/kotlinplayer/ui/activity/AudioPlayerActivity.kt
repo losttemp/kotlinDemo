@@ -24,11 +24,13 @@ import de.greenrobot.event.EventBus
 import kotlinx.android.synthetic.main.activity_music_player_bottom.*
 import kotlinx.android.synthetic.main.activity_music_player_middle.*
 import kotlinx.android.synthetic.main.activity_music_player_top.*
+import org.jetbrains.anko.toast
 
 class AudioPlayerActivity : BaseActivity(), View.OnClickListener, AdapterView.OnItemClickListener {
     val MSG_PROGRESS: Int = 11
     var drawable: AnimationDrawable? = null
     var duration: Int = 0
+    var from: Int?=-1
     val handler = object : Handler() {
         override fun handleMessage(msg: Message?) {
             when (msg?.what) {
@@ -46,6 +48,8 @@ class AudioPlayerActivity : BaseActivity(), View.OnClickListener, AdapterView.On
         //注册EventBus
         EventBus.getDefault().register(this)
         val intent = intent
+        from = intent?.getIntExtra("from", -1)
+
         intent.setClass(this, AudioService::class.java)
         bindService(intent, conn, Context.BIND_AUTO_CREATE)
         startService(intent)
