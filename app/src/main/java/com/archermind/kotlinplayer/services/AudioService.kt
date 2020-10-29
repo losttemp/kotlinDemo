@@ -1,22 +1,30 @@
 package com.archermind.kotlinplayer.services
 
-import android.app.Service
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
+import android.support.v4.app.NotificationCompat
 import android.util.Log
+import android.widget.RemoteViews
+import com.archermind.kotlinplayer.R
 import com.archermind.kotlinplayer.model.AudioBean
+import com.archermind.kotlinplayer.ui.activity.AudioPlayerActivity
+import com.archermind.kotlinplayer.ui.activity.MainActivity
 import de.greenrobot.event.EventBus
-import org.jetbrains.anko.sp
+import kotlinx.android.synthetic.main.activity_setting.view.*
 import java.util.*
+
 
 class AudioService : Service() {
     private val TAG: String = "AudioService"
     private var list: ArrayList<AudioBean>? = null
-
+    private var manager: NotificationManager? = null
     private var mediaPlayer: MediaPlayer? = null
+    private var notification: Notification? = null
     private var position: Int = -2// 正在播放的position
     val FROM_PRE = 1
     val FROM_NEXT = 2
@@ -105,6 +113,59 @@ class AudioService : Service() {
             start()
             //通知界面更新
             notifiUpdateUi()
+            //显示通知
+            showNotification()
+        }
+
+        /**
+         * 显示通知
+         */
+        private fun showNotification() {
+            manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notification = getNotification()
+            manager?.notify(1, notification)
+        }
+
+        /**
+         * 创建notification
+         */
+        private fun getNotification(): Notification? {
+            //创建NotificationChannel
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val mnotification = NotificationCompat.Builder(this@AudioService, "channel_name")
+                        .setTicker("正在播放歌曲${list?.get(position)?.display_name}")
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        //自定义通知view
+                        .setCustomContentView(getRemoteViews())
+                        .setWhen(System.currentTimeMillis())
+                        .setOngoing(true)//设置不能滑动删除通知
+                        .setContentIntent(getPendingIntent())//通知栏主体点击事件
+                        .build()
+                var channel = NotificationChannel("channel_name", packageName, NotificationManager.IMPORTANCE_HIGH)
+                manager?.createNotificationChannel(channel)
+                return mnotification
+            }
+            return null
+
+        }
+
+        /**
+         * 通知栏主体点击事件
+         */
+        private fun getPendingIntent(): PendingIntent? {
+            val intentM = Intent(this@AudioService, MainActivity::class.java)
+            val intentA = Intent(this@AudioService, AudioPlayerActivity::class.java)
+            intentA.putExtra("from", FROM_CONTENT)
+            val intents = arrayOf(intentM, intentA)
+            val pendingIntent = PendingIntent.getActivities(this@AudioService, 1, intents, PendingIntent.FLAG_UPDATE_CURRENT)
+            return pendingIntent
+        }
+
+        private fun getRemoteViews(): RemoteViews? {
+            val remoteViews = RemoteViews(packageName, R.layout.notification)
+            remoteViews.setTextViewText(R.id.title, list?.get(position)?.display_name)
+            remoteViews.setTextViewText(R.id.artist, list?.get(position)?.artist)
+            return remoteViews
         }
 
         /**
@@ -242,6 +303,7 @@ class AudioService : Service() {
             playItem()
         }
     }
+
 
 }
 

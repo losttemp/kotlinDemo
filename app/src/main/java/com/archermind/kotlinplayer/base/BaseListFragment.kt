@@ -62,8 +62,11 @@ abstract class BaseListFragment<RESPONSE, ITEMVIEW : View, ITEMBEAN> : BaseFragm
 
     override fun onError(message: String?) {
         //隐藏刷新控件
-        refreshLayout.isRefreshing = false
-        showToast("加载失败")
+        try {
+            refreshLayout.isRefreshing = false
+            showToast("加载失败")
+        } catch (e: Exception) {
+        }
     }
 
 
